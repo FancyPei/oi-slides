@@ -1,0 +1,677 @@
+
+<html>
+  <Head>
+    
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+    
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>Hello, Linux World</title>
+  </Head>
+  <body>
+   
+   
+<textarea id="source">
+public: True
+class: center, middle
+
+# Hello, Linux World
+
+蒋炎岩 <jyy@nju.edu.cn>
+
+<div class="row justify-content-md-center">
+  <div class="center author-block">
+    <p><a href="http://www.nju.edu.cn/">南京大学</a></p>
+    <img class="inline-img" height="64px" src="/static/img/nju.png"/>
+  </div>
+  <div class="center author-block">
+    <p><a href="http://cs.nju.edu.cn/">计算机科学与技术系</a></p>
+    <img class="inline-img" height="64px" src="/static/img/njucs.jpg"/>
+  </div>
+  <div class="center author-block">
+    <p><a href="http://moon.nju.edu.cn/">计算机软件研究所</a></p>
+    <img class="inline-img" height="60px" src="/static/img/ics-nju.png"/>
+  </div>
+</div>
+
+---
+
+# 个人简介
+
+蒋炎岩 <jiangyy@outlook.com>
+
+* 临时工，计算机软件研究所 ([ICS](http://ics.nju.edu.cn))
+* 过气老选手 (<del>曾经年轻过</del>)
+* JSOI/南京大学 ACM-ICPC 集训队教练
+
+----
+
+研究方向
+
+* 程序测试与分析/运行时系统/程序合成
+* [<del>常年招收搬砖工</del>](ICS_NJU)
+---
+
+# Project-N 简介
+
+ .float-right[![](/static/wiki/logo-n.png)] 目标：“一个极简、完备、现代、本科生可以完成的现代计算机系统栈”
+
+* [AbstractMachine](AM) - 硬件抽象层
+* Nanos - 操作系统
+* NEMU - 全系统模拟器 ← .blue[本学期内容]
+* NPC/NOOP - 处理器
+
+----
+
+.float-right[<img src="/static/wiki/ics/2018/slides/img/projectn.jpg" width="200px"/>] 我们还有很多事情要做……
+
+* 在自制 CPU 上跑起 Linux
+* 编译器
+* 完善的操作系统/体系结构等实验……
+
+---
+
+# 《计算机系统基础》习题课简介
+
+负责练习、课堂部分的讲解和补充 (以编程实践为主)
+
+但大家不能指望习题课，最重要的技术是：
+
+* .red[STFW]
+* .red[RTFM]
+* .red[RTFSC]
+
+----
+
+> 我不是PA的作者，我是yzh的地上代言人
+
+---
+
+# 📢 公告：PA0
+
+提交截止日期 .red[9 月 8 日 23:59:59]
+
+你肯定很好奇：啥也不要做为什么还要提交个空的？
+
+> 框架代碼的壓縮包, 和 pdf 文檔
+>
+> 第一次提交會有一大堆人不符合規範
+>
+> 可以提前噴一下
+>
+> —— yzh
+
+---
+
+# 本讲概述
+
+说服大家：.red[费尽千辛万苦学习使用 Linux 是值得的]
+
+* 以及命令行有 super cow power (STFW)!
+
+.center[<img src="/static/wiki/ics/2019/img/vconsole.png" width="540px"/>]
+
+---
+
+# 补充说明
+
+大家都在装机的时候遇到了各种问题
+
+* 没有装机指导，.red[STFW]！
+    * 在完成以后，你会发现你积累了很多知识 (比如什么是“挂载点”)
+
+--
+
+count: false
+
+* 以下环境均可完成实验：Windows Subsystem for Linux、Docker、虚拟机 (任何 Linux 发行版)、没有图形界面的服务器 (但都需要 .red[STFW])
+
+---
+class: center, middle
+
+# 为什么？
+
+---
+
+# 回到过去
+
+在UNIX (Linux 的祖宗) 诞生的时候，没有 Windows，没有 GUI (也没有鼠标)，只有终端、磁带…… 
+
+* 终端 <math>\approx</math> 那个 Dev-Cpp 运行程序时的黑色窗口
+
+.center[<img src="/static/wiki/ics/2018/slides/img/VT100.jpg" width="350px"/>]
+
+---
+
+# 如何用有限的计算机，完成各种任务？
+
+.float-right[<img src="/static/wiki/ics/2019/img/ken.jpg" width="200px"/>]
+有一个很巧妙的设计 (UNIX)，使得我们在命令行里可以轻而易举地搞定各种事情
+
+* 日常使用：管理文件/进程/……
+* 编代码
+* 写论文，生成 PDF 文件 (甚至编辑 PDF)
+* 收发邮件
+
+----
+
+你能想象怎样用命令行搞定这一切？
+
+* .red[这个设计被延续到了今天]
+
+---
+
+# 例子：解放你的鼠标
+
+.float-right[<img src="/static/wiki/ics/2019/img/light-saber.jpg" width="300px"/>]
+
+* `ping baidu.com` - 看看基本网络状态
+* `df /` - 查看磁盘使用情况
+* `find . -name "*.cpp"` - 查找当前目录下的cpp文件
+* `fdisk /dev/sdb` - 对磁盘进行分区
+* `shutdown -h 0` - 在0时间后关闭计算机
+* `sudo apt install libreoffice` - 切换到根用户执行命令
+* `pdflatex assignment.tex` - 编译待提交的作业
+* `iconv -f gbk -t utf-8 file.txt` - 文件编码转换
+
+---
+
+# 例子：编辑 LaTeX 表格
+
+下载：[table.tex](/static/wiki/ics/2019/files/table.tex)
+
+转换前：
+
+```latex
+a & $\alpha$   \\
+b & $\beta$    \\
+...
+```
+
+转换后：
+
+```latex
+1 & a & $\alpha$ & \alphatest{Alpha}  \\
+2 & b & $\beta$  & \alphatest{Beta}   \\
+...
+```
+
+----
+
+关键步骤：
+
+* 块选择 (C-v)
+* 宏录制 (qx/@x; f; C-a)
+
+---
+
+# 为什么要进入 Linux 世界？
+
+* 客观原因
+    * <span class="red">实验要求的，不进没分</span>
+
+----
+
+* 实际原因
+    * 现代计算机系统的事实标准
+    * 代表真正的 “生产力”
+    * 非常丰富、可定制、看得见源码的软件栈
+    * 自由软件的精神
+
+---
+
+class: center, middle
+
+# 进入新世界
+
+---
+
+# 新世界的第一课
+
+啥玩意啊！
+
+> Unix *is* user friendly. It's just selective about who its friends are.
+> .float-right[——一个老笑话]
+
+.center[<img src="/static/wiki/ics/2019/img/kernel-login.gif" width="640px"/>]
+
+---
+
+# 新世界的第一课 (cont'd)
+
+Read The F**king Manual，也就是学到最重要的第一个命令
+
+<center><span style="color:red;font-size:200%">man</span></center>
+就是那个RTFM的 M。Linux世界里的命令都是这样简写的：
+
+* cd, ls, echo, wc, tr, mount, sed, fsck, grep, awk, ...
+
+----
+
+`man`在习惯之后，日常生活中非常好用
+
+* `man man`学习如何RTFM：`man 2`查看系统调用；`man 3`可以查看标准库，`man -k`可以完成检索
+
+* `man`也有很多高级一些的替代品，比如`info`, W (STFW)
+
+---
+
+# 接受一个新世界
+
+> *Keep it simple, stupid*. (KISS)
+> .float-right[——The UNIX Philosophy]
+
+----
+
+Linux有一套全新的概念体系：
+
+* *Everything* is a file: 文本、图片、I/O设备、系统配置、……
+* *Pipelining* programs: 基本做事方式是把命令互相连接(Shell/脚本)
+
+----
+
+.center[<img src="/static/wiki/ics/2019/img/everything-is-a-file.png" width="640px"/>]
+
+---
+
+# 基本原理
+
+你想做.red[任何事]时，一般都有现成的工具帮你完成
+
+* 有些小工具看起来甚至挺蠢的
+
+----
+
+把文件的内容打印出来 (cat)
+
+* 这个我也会啊，拿 C/C++/Java 语言写就完事了
+
+统计文件的行数 (wc)
+
+* 这个简单，跟打印文件没啥区别，就数`\n`的数量
+
+在文件里查找出包含某个模板字符串的行 (grep)
+
+* 这也好办，就是字符串匹配嘛
+
+----
+
+这些工具看起来都很简单：.blue[我自己也能实现一个]
+
+---
+
+# 新世界：命令行工具的组合
+
+配合上 *everything is a file*，把一个程序的输出接到另一个程序的输入，就能干很多好玩的事情了！
+
+* 统计所有 cpp 文件的行数：`find . | grep '\.cpp$' | xargs cat | wc -l`
+* 统计命令行命令的频率：`history | tr -s ' ' | cut -d ' ' -f3 | sort | uniq -c | sort -nr`
+
+--
+
+count: false
+
+----
+
+<img class="float-right" src="/static/wiki/ics/2018/slides/img/manong.jpg" width="200px"/>以上都是命令行里的.red[命令]，但同时也是 bash script 的.red[程序]
+
+* 无时不刻开开心心编程
+
+---
+
+# 💡 Linux世界：小窍门
+
+遇到错误，你是不是第一反应就是去胡乱尝试一通？对了就对了，不对就抓瞎？
+
+是不是有时候不知道该到底怎么 STFW, RTFM？
+
+* [找一本好书](SystemReading)
+* 从读脚本开始：不要觉得 Makefile、提交脚本都是和你.red[无关]的
+    * 试图理解一切事情是如何发生的
+    * 从读得懂开始，逐渐过渡到会写
+* 拥抱新文化
+    * UNIX 世界也在变化：[tldr](https://tldr.sh), zsh/[oh-my-zsh](https://ohmyz.sh), [z](https://github.com/rupa/z), [thefuck](https://github.com/nvbn/thefuck), ...
+
+----
+
+很快你也会成为高手的
+
+---
+
+class: center, middle
+
+# 实例分析：程序员的日常
+
+我们每天是怎么和命令行相处的？
+
+---
+
+# 不夸张地说：任何事
+
+随便举一些日常生活里让你浪费很多时间重复的例子：
+
+* (学霸福利) 刷教务系统看看分数有没有出来
+* 对一个目录里的所有 .cpp 文件执行同样的 vim 动作
+* (latax 用户福利) 把 LibreOffice 的演示文稿导出为 PDF，然后将每一页的白边部分裁去，分别命名为`fig-1.pdf`, `fig-2.pdf`, ...
+* 把一大堆扫描的 jpg 图片分别打上页码，按顺序拼接成 pdf
+
+---
+
+# 从联网开始
+
+打开浏览器，登录 `p.nju.edu.cn` (已保存密码)，点击 “登录”
+
+```bash
+curl -d "username=用户名&password=密码" \
+  http://p.nju.edu.cn/portal_io/login
+```
+
+----
+
+这有什么用？
+
+* 可以实现校园网内某台机器的长久连接 (brasd)
+* 可以作为你的校内代理服务器
+* 实现内网穿透 (谨慎，可能会被查饮水机)
+* ……
+
+---
+
+# 日常使用
+
+2018年友情参与了ACM-ICPC南京赛区代码查重(ICPC💊)
+
+* 使用我们自己的代码查重工具 [Needle](https://zhuanlan.zhihu.com/p/40568346)
+<img class="float-right" src="/static/wiki/ics/2018/slides/img/needle-qr.png" width="150px"/>
+* ACM-ICPC 2018 南京赛区网络预赛：总共取消了 40 个学校的参赛资格，包含 985, 211, 两所承办校
+
+----
+
+对于一次网络预赛，日常统计：
+
+* 有多少份AC的提交？
+* 每个题有多少个不同的AC提交？
+* AC代码一共有多少行？
+* 重复情况如何？
+
+---
+
+class: center, middle
+
+# 实例分析：作业提交
+
+PA的提交系统就是一个典型的命令行使用案例
+
+---
+
+# 神奇的作业提交方式
+我只要进到PA的目录里，一条命令就提交作业了？？？再也不用去那个令人智熄的 cslabcms 了。
+
+> 平台具有三大特点：规范及量化教学过程、编程作业实时查重和学习行为统计与分析。
+>
+> 查重及实时查重功能支持包括 C, C++, Java, Javascript,VB, Perl,Pascal, Matlab, 8086 Assembly, MIPS Assembly, Fortran 等多种编程语言，适用性较广。
+
+到 2016 年，这个系统作业都只能提交一次😂交错了就要联系助教删除……
+
+---
+
+# 作业提交：命令解析 (1)
+
+
+<center><code>bash -c "$(curl -s http://.../submit.sh)"</code></center><img class="float-right" src="/static/wiki/ics/2018/slides/img/curl.jpg" width="150px"/>
+* bash 是 Linux 中默认的 Shell，PA 里的“命令行”就是这个
+* bash 同时也是系统里的一个应用程序(和 Hello World 一样)，能在命令行里调用
+* `-c` 选项会让 bash 把下一个参数当做脚本执行
+* `$(...)` 表示把括号里的命令执行，把输入粘贴进来。`"$(...)"` 把所有输出当成一个字符串
+* `curl` (*command line tool and library* for transferring data with URLs) 就厉害了，它也是一个程序，我们用它下载一个url (输出到标准输出)
+
+---
+
+# 作业提交：命令解析 (2)
+
+```bash
+bash -c "$(curl -s http://.../submit.sh)"
+```
+
+实际完成的功能：在网络上下载一个脚本，然后丢到 bash 的 -c 参数里执行。看来这个执行的脚本就是PA提交的关键了。直接在浏览器里[打开链接](http://moon.nju.edu.cn/people/yyjiang/teach/submit.sh) (本地镜像[submit.sh](/static/wiki/ics/2019/files/submit.sh))，就能查看源代码了。
+
+----
+
+还有一些其他类似的写法：
+
+```bash
+curl -s http://.../submit.sh | bash -
+```
+
+---
+
+# 作业提交：命令解析 (3)
+
+脚本就是一个bash程序，这些命令也可以直接复制粘贴到命令行里。
+
+```bash
+set -e
+[ -z ${STUID} ]   && echo "STUID must be set (RTFM)"   && exit
+[ -z ${STUNAME} ] && echo "STUNAME must be set (RTFM)" && exit
+echo "${STUID} (${STUNAME}) submitting ${TASK}..."
+```
+
+* `set -e`的作用是，只要有任何命令失败就退出
+* 第二行的判断`[ -z`判断字符串是否为空，如果字符串不空，后面就不会执行了，否则会打印错误消息退出
+
+代码功能：确认`${STUID}, ${STUNAME}`变量的值。
+
+---
+
+# 作业提交：命令解析 (4)
+
+```bash
+cwd=${PWD##*/}
+```
+
+整个脚本里最难理解的：`${PWD##*/}`，只好RTFM啦
+
+> PWD: 一个变量，总是代表当前目录的绝对路径。
+>
+> ${string##substring}: 删除变量string中最长匹配substring的部分。
+
+执行完之后，`cwd`就是当前目录名。比如你现在在`/home/xyz/ics-pa`目录里，相当于执行`cwd=ics-pa`
+
+---
+
+# 作业提交：命令解析 (5)
+
+```bash
+wiki=`curl -m 1 -Ls -w '%{url_effective}' -o /dev/null 'http://ics.nju.edu.cn/~jyywiki' | grep -o 'http://[^/]*/'`
+```
+
+再次见到了`$()`，代表把一个程序的输出粘贴到脚本里。
+
+* `curl`依然是从网络上获取，不过参数更多了。比较重要的是：
+  * URL `ics.nju.edu.cn/~jyywiki`会重定向到校内IP
+  * 输出`%{url_effective}`，并且把输出重定向到`/dev/null` (丢弃)，等于获取重定向的URL
+  * 得到http://114.212.XX.YY:5000/wiki/Main_Page 
+* `|`是管道，代表把`curl`的输出作为`grep`的输出，把IP地址爬出来。
+  * 得到http://114.212.XX.YY:5000/ 。无论校内IP变成什么，只要永久URL更新，就能提交到正确的位置提交。
+
+---
+
+# 作业提交：命令解析 (6)
+
+```bash
+tarball=$(mktemp -q).tar.bz2
+bash -c "cd .. && tar cj ${cwd} > ${tarball}"
+curl -F "task=${TASK}" -F "id=${STUID}" -F "name=${STUNAME}" \
+     -F "submission=@${tarball}" ${wiki}upload
+```
+
+你能试着“读出”这个这些命令是做什么的吗？
+
+* `mktemp`用于生成一个临时文件，`-q`：出错时悄悄返回
+* `tar`用于压缩，`c`：创建压缩包；`j`：使用bzip2压缩
+* 最后一个`curl`命令将参数和文件一并提交
+
+---
+
+# 安装脚本：应用
+
+很多现代开源软件都用这种方式实现“一键安装”
+
+- Homebrew
+
+<center><img src="/static/wiki/ics/2018/slides/img/homebrew.png" width="600px"/></center>
+- oh-my-zsh (推荐大家使用，安装脚本也可以看得懂了)
+
+```bash
+sh -c "$(curl -fsSL https://.../install.sh)"
+```
+
+---
+
+# 小结
+
+脚本大法真是好：要点那么多鼠标的事情也可以自动化！
+
+* 各种牛逼的万能工具 curl, mktemp, ...组合 `$()`, `|`, ...
+
+<center><img src="/static/wiki/ics/2018/slides/img/geek.png" width="550px"/>
+---
+
+# 作业提交：命令解析 (7)
+
+但是脚本也难学啊<img class="float-right" src="/static/wiki/ics/2018/slides/img/python.jpg" width="150px"/>
+
+* 各种奇葩的语法，动不动就要 RTFM，还很容易写错，存在潜在漏洞 (比如文件名里的空格……)
+
+----
+
+所以服务器的后台其实是 Python (总共才~70行代码)
+
+* 各种提交合法性检查(比如学号/姓名对应)
+* 解析压缩包
+* 寻找是否有根目录下的 .git (否则 warning)
+* 寻找是否有根目录下的学号 .pdf (否则 warning)
+
+---
+
+class: center, middle
+
+# 克服惰性、拖延和恐惧
+
+看到命令行我就难受……
+
+---
+
+# 原因分析
+
+⚠️：人天生就对**未知**的东西的产生**恐惧**和**逃避**
+
+> * 不想学 bash，对命令感到恐惧；
+> * 不想用 vim/emacs，在 gedit 的默认参数下活得很好、看项目代码也用鼠标点点；
+> * 不想用 tmux，要开多个 ssh；
+> * 不愿意看手册，只想守着那一点学过的语言特性一直到老；
+> * 不懂的命令不愿意 man 一下；
+> * ……
+
+---
+
+class: center, middle
+
+# 从今天开始，不要再懒啦
+
+(1) Don't give up easy.
+
+(2) Get out of your comfort zone.
+
+---
+
+# “用对的工具做对的事”
+
+习题：阅读更大的代码
+
+* 拿到一个比较大的项目 (例如 busybox)，解压缩能不能不用鼠标(到时候如果有一堆压缩包，你就点不过来了)？
+* 几百个源文件，连 `main` 在哪里都找不到，怎么办？
+* 代码里有很多宏定义、函数声明，怎么快速找到？
+* 如果看到了不会用的库函数，怎么快速看下它是做什么的？
+* 如果想在 ipad 上阅读这些代码，有什么办法？
+
+**<center><font color="red">记住：总有工具让一切变得简单</font></center>**
+
+----
+
+STFW！一旦适应这个节奏，你就会给人一种“黑客”的感觉了！
+
+---
+
+class: center, middle
+
+# 从今天开始编程
+
+在写问求作业的时候，你在编程 (latex)
+
+在写 PA 的时候，你在编程 (C)
+
+在控制台输入命令的时候，你在编程 (bash, sed, make, regex, ...)
+
+打开 Vim 编辑文本的时候，你也在编程 (ex)
+
+<img src="/static/wiki/ics/2018/slides/img/manong.jpg" width="250px"/>
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

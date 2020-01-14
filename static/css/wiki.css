@@ -1,0 +1,445 @@
+p {
+  word-break: break-all;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+
+.red   { color:red; }
+.green { color:green; }
+.blue  { color:blue; }
+s      { color:red; }
+n      { color:blue; }
+.del   { text-decoration: line-through; }
+
+.article-container {
+  box-shadow: 0 0 20px #ddd;
+  margin-top: 60px;
+  border: 1px solid #e0e0e0;
+  padding: 1em 2em 2em 2em;
+  max-width: 768px;
+  background-color: white;
+}
+
+.navbar {
+  color: #eeeeee;
+  font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans","wenquanyi micro hei","Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
+  min-height: 40px;
+  padding: 0 0 0 15;
+}
+
+.navbar a,
+.nav-link {
+  color: white;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.navbar-nav a {
+  font-size: 14px;
+}
+
+.navbar-nav li a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.footer-bottom {
+  margin-top: 15px;
+  min-height: 50px;
+}
+
+
+/* Page Layout */
+
+.article {
+  font-size: 12.5pt;
+  font-family: 'Crimson', 'Songti SC', '华文宋体', 'AR PL SungtiL GB', 'STSongti', 'SimSun', 'Serif';
+  color: black;
+}
+
+.article h1,
+.article h2,
+.article h3,
+.article h3,
+.article h4,
+.article h5,
+.article h6 {
+  font-family: 'PT Sans', 'Sans Serif', Helvetica, Arial, 'STHeiti', 'SimHei', 'Sans Serif';
+  border: none;
+  font-weight: bold;
+}
+
+.article a, .article a:visited {
+  text-decoration: none;
+  color: #03c;
+}
+.article a:hover {
+  text-decoration: underline;
+}
+
+.article ul {
+  list-style: disc;
+}
+
+.article {
+  text-align: justify;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  line-height: 1.65em;
+}
+
+.article h1, .article h2, .article h3, .article h4, .article h5, .article h6, div#content h1, div#content h2, div#content #firstHeading {
+  line-height: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.article h1, div#content h1 {
+  font-size: 1.75em;
+}
+
+.article h2, div#content h2 {
+  font-size: 1.45em;
+}
+
+.article h3 {
+  font-size: 1.2em;
+}
+
+.article h4 {
+  font-size: 1.1em;
+}
+
+.article h5, .article h6 {
+  font-size: 1.0em;
+}
+
+.article p {
+  text-indent: 2em;
+  margin-bottom: 10px;
+}
+
+.article li p {
+  text-indent: 0em;
+  margin-bottom: 0px;
+}
+
+table.ambox {
+  margin-bottom: 1em;
+}
+
+dl dd {
+  /* center definitions (most useful for display equations) */
+  text-align: center;
+}
+
+/* Table of Contents */
+
+.toc {
+  border: none;
+  padding: 0;
+  display: block;
+}
+
+.toc ul {
+  margin-left: -1em;
+}
+
+/* Figures */
+
+div.tright {
+  margin: 0.5em 0 0.5em 1.5em;
+}
+
+div.tleft {
+  margin: 0.5em 1.5em 0.5em 0;
+}
+
+.article code {
+  word-break: break-all;
+  font-size: 80%;
+  color: inherit;
+  background-color: transparent;
+  font-family: 'Fira Code', STKaiTi, KaiTi, '楷体', 'AR PL KaitiM GB';
+}
+
+.article pre {
+  font-size: 80%;
+  line-height: 1.5em;
+  background-color: #eeeefe;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 5 15 5 15;
+  border-radius: 5px;
+  word-wrap: normal;
+  word-break: normal;
+  font-family: 'Fira Code', STKaiTi, KaiTi, '楷体', 'AR PL KaitiM GB';
+  color: inherit;
+}
+
+.article code {
+  font-size: 14px;
+}
+
+.article blockquote {
+  padding: 10 10 1 10;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: #eee;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.article blockquote p {
+  text-indent: 0em;
+  line-height: 1.5em;
+  font-size: 95%;
+  font-family: Crimson, STKaiTi, KaiTi, '楷体', 'AR PL KaitiM GB';
+}
+
+.fenced {
+  padding: 0px 10px 0px 10px;
+  line-height: 1.5em;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 14px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcf8e3;
+  color: #c09853;
+  border: 1px solid #fbeed5;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 95%;
+  font-family: Crimson, STKaiTi, KaiTi, '楷体', 'AR PL KaitiM GB';
+  box-shadow: 2px 2px 5px 0.1px #ccc;
+}
+.fenced h4 {
+  border-bottom: 1px solid #c09853;
+  margin-top: 5px;
+  text-shadow: 1px 1px 1px #ccc;
+}
+.fenced li {
+  margin-left: 0em;
+}
+.fenced p {
+  text-indent: 0em;
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
+.fenced ol, .fenced ul {
+  margin-bottom: 0;
+  margin-left: -1em;
+}
+.fenced-green {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.fenced-green h4 {
+  font-size: 100%;
+  border-bottom: 1px solid #468847;
+}
+.fenced-red {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+.fenced-red h4 {
+  border-bottom: 1px solid #b94a48;
+}
+.fenced-blue {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.fenced-blue h4 {
+  border-bottom: 1px solid #3a87ad;
+}
+
+sup {
+  text-indent: 0;
+}
+
+.katex { font-size: 1.0em; }
+
+.watermark {
+  position: fixed;
+  opacity: 0.1;
+  font-size: 128px;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.textimg {
+  height: 18px;
+}
+
+img {
+  max-width: 90%;
+}
+
+.box {
+  border-radius: 2px;
+  padding: 6px 4px 2px 4px;
+}
+.box-blue {
+  background-color: rgba(66, 139, 202, 0.5);
+}
+.box-green {
+  background-color: rgba(92, 184, 92, 0.5);
+}
+.box-red {
+  background-color: rgba(217, 83, 79, 0.5);
+}
+.box-yellow {
+  background-color: rgba(240, 173, 78, 0.5);
+}
+.box-gray {
+  background-color: #a0a0a0;
+}
+
+table {
+  border: 0px solid #000000;
+  text-align: left;
+  border-collapse: collapse;
+  background: #fff;
+  margin-left:auto; 
+  margin-right:auto;
+}
+table td, table th {
+  padding: 5px 7px;
+}
+table tr:nth-child(even) {
+  background: #f0f0f0;
+}
+
+table tr:first-child {
+  border-top: 1px solid;
+}
+table tr:last-child {
+  border-bottom: 1px solid;
+}
+table thead {
+  background: #CFCFCF;
+  background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  border-top: 1px solid #000000;
+}
+table thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: left;
+  padding-top: 10px;
+}
+table tfoot td {
+  font-size: 14px;
+}
+
+.submissions { text-indent: 0; font-size: 90%; }
+.submissions th, td { padding: 0 5px 0 5px; border: 0 0 0 0; }
+.submissions td + td { border-left: 0px; }
+.submit-date { color: #a0a0a0; font-size: 12px; }
+
+.gser-input {
+  width: 110px;
+  text-align: center;
+}
+
+.subbox input {
+  display: inline;
+}
+
+.roll {
+  display: inline-block;
+  margin: 3 3 3 3;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #000;
+}
+
+.sep {
+  display: inline-block;
+  width: 1px;
+  height: 30px;
+  margin: 3 10 3 10;
+  border-left: 2px solid #ccc;
+}
+
+.roll-area {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto; 
+  text-align: center;
+}
+
+.article .hidden-in-outline {
+  display: none;
+}
+
+nav .form-inline {
+  padding-top: 0px; 
+  margin-left: auto;
+}
+
+.nav-item {
+  margin-left: 10px;
+}
+
+.nav-item:hover {
+  background-color: #666;
+}
+
+nav .form-inline {
+  margin-block-end: 0;
+}
+#token-input {
+  width: 120px;
+  color: #ccc;
+  background-color: transparent;
+  font-family: 'Fira Code', 'Monospace', 'Consolas', 'Courier New';
+  border: 0px;
+  font-size: 12px;
+}
+
+/* cards (online judge results) */
+.submission .card-header {
+  padding: 0;
+}
+
+.submission .card button {
+  color: #03c;
+}
+
+.submission .submission-result h1 {
+  font-size: 1em;
+}
+
+.submission .badge {
+  font-family: 'PT Sans';
+}
+
+.submission .submit-card {
+  background-color: #eee;
+}
+
+.submission form {
+  font-family: 'PT Sans';
+  font-size: 13px;
+  margin-block-end: 0;
+}
+
+.submission .form-row {
+  padding-left: 10px;
+}

@@ -49,8 +49,8 @@ li {
 }
 
 blockquote {
-  color: #404084;
-  font-size: 24px;
+  border-left: solid 5px lightgray;
+  padding-left: 1em;
 }
 
 .remark-slide-scaler {
@@ -93,8 +93,9 @@ pre {
 }
 
 .remark-inline-code {
-  background-color: inherit;
+  background-color: #F0F0F0;
   color: inherit;
+  font-family: monospace;
 }
 
 .remark-code {

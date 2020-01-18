@@ -1,0 +1,139 @@
+
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>课程简介</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 课程简介
+
+Fancy
+
+---
+
+# 个人简介
+
+* 南京大学 计算机科学与技术系
+* 高中信息学奥林匹克竞赛省队选手
+
+---
+
+# 课程简介
+
+- 内容：程序设计（C++）及信息竞赛入门
+- 时间：  2020/1/19-23, 2020/1/30-2/8, 14:00-16:00
+- 本课程由 Google Women Techmaker Program 赞助
+
+> 默认大家都没有基础，如果觉得进度太慢可以单独来找我
+
+---
+
+# 为什么要学编程💻
+
+- 信息世界（如电脑上的应用程序）大部分由程序构成
+- 电脑是优秀的工具（而不是玩具），计算机的计算能力比人脑要强得多
+- 锻炼逻辑思维能力
+???
+- 浏览器，页面
+- 1e9 vs 1，Alpha Go，你让它做什么就做什么
+- Demos
+
+---
+
+# 编程语言
+
+- 编程语言：C, C++, Java, Python, ......
+- 语法、风格不同，但大部分高级语言的表达能力大致相同
+- C++：操作丰富、用法简单、兼容C
+
+> 代码 (code) ≈ 程序 (program)
+
+---
+
+# 信息竞赛
+
+- 五大学科竞赛之一
+- CSP-J/S (NOIP) -> 省选 -> NOI -> IOI
+- 内容：算法+数据结构
+
+---
+
+# 参考资料
+- .red[（适合小学生）]《啊哈C语言！逻辑的挑战（修订版）》啊哈磊 电子工业出版社
+- 《啊哈！算法》啊哈磊 人民邮电出版社
+- 《信息学奥赛一本通 第五版（C++版）》董永建 科学技术文献出版社
+- .red[（适合高中生）（最推荐）]《算法竞赛入门经典（第2版）》刘汝佳 清华大学出版社
+
+> 我这有电子版。   
+> 如果真的想买书的话来找我，理论上可以去找 Google 报销。
+
+- .red[（OJ）] [洛谷](https://www.luogu.com.cn)
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

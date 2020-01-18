@@ -1,0 +1,259 @@
+
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>顺序结构</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 顺序结构
+
+Fancy
+
+---
+
+class: center, middle
+
+# 让计算机开口说话
+
+---
+
+# 编译器
+
+源代码（如 .cpp）（人可以读懂的）  
+&nbsp; |  
+&nbsp; | 编译器  
+&nbsp; ↓  
+机器语言（如 .exe）（计算机可以读懂的）
+
+----
+
+IDE = 编辑器 + 编译器
+
+---
+
+# 安装 Dev-C++
+
+[下载地址](https://sourceforge.net/projects/orwelldevcpp/files/latest/download)  
+[安装教程](http://c.biancheng.net/cpp/html/3389.html)
+
+提示：
+- 括号补全：工具 - 编辑器属性 - 代码补全 - 完成符号
+---
+
+# Hello, world!
+
+1. 新建文件：文件 - 新建 - 源代码（Ctrl + N）
+2. 调整字体大小：工具 - 编辑器属性 - 显示 - 编辑器字体 - 大小（Ctrl + 滚轮）
+3. 把输入法调成英文，然后输入
+```c++
+#include <iostream> // 引用包含 cout 函数的头文件
+#include <cstdio> // 引用包含 printf 函数的头文件
+using namespace std; // 使用标准命名空间
+int main() { // 每个文件都有唯一的主函数，主函数内部每条语句由 ";" 分隔
+        cout << "Hello, world!" << endl; // cout 表示输出，endl 表示回车
+        printf("Hello, world!\n"); // printf 表示输出，"\n" 表示回车
+        return 0; // 函数结尾，返回 0，不写也可以
+}
+```
+4. 保存：文件 - 保存（Ctrl + S）
+5. 运行：运行 - 编译运行（F11）
+6. 屏幕上出现 "Hello, world!"
+
+---
+
+# a + b
+
+```c++
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+    int a, b, c;
+    cin >> a >> b;
+//    scanf("%d%d", &a, &b);
+    c = a + b;
+    cout << c << endl;
+//    printf("%d\n", c);
+    return 0;
+}
+```
+
+小数：`float a, b, c;` `printf("%f\n", c);`
+
+---
+
+class: center, middle
+
+# C++ 运算符
+
+---
+
+# 运算符
+|            |      | |
+| :--------: | :--------: | :--------: |
+| 赋值运算符 | 赋值运算 |简单赋值(=)、复合算术赋值(+=, -=, *=, /=, %=)、复合位运算赋值(&=, l=, ^=, >>=, <<=)|
+| 算术运算符 | 数值运算 | 加(+)、减(-)、乘(*)、除(/)、求余/模运算(%)、自增(++)、自减(--) |
+| 关系运算符 |比较运算| 大于(>)、小于(<)、大于等于(>=)、小于等于(<=)、等于(==)、不等于(!=) |
+| 逻辑运算符 |逻辑运算|与(&&)、或(ll)、非(!) |
+---
+
+# 运算符
+|            |      | |
+| :--------: | :--------: | :--------: |
+|  位操作运算符 | 按二进制位进行运算| 位与(&)、位或(l)、位非(~)、位异或(^)、左移(<<)、右移(>>) |
+| 条件运算符 |条件求值 | (?:)|
+| 逗号运算符 |把若干表达式组合成一个表达式 |,|
+| 指针运算符| 取内容(*)和取地址(&)| *, &|
+| 求字节数运算符 |计算数据类型所占的字节数 | sizeof|
+| 特殊运算符 |      | 括号()，下标[]，成员(->, .)等|
+
+---
+
+# 赋值运算符
+- `变量 = 表达式;`   如 `a = 3; ` `c = a + b;`
+- `变量 = (变量 = 表达式);`   如 `a = b = c = 3; ` 等价于 `a = 3; b = 3; c = 3;`
+- 类型不同会自动转换，如 `a = 3.1` 后，a 的值为 3。
+----
+例：输入两个小数，将它们交换后输出。
+
+---
+
+# 赋值运算符
+
+例：输入两个小数，将它们交换后输出。
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+    float a, b, c;
+    cin >> a >> b;
+//    scanf("%f%f", &a, &b);
+    c = a;
+    a = b;
+    b = c;
+    cout << "a = " << a << ", b = " << b << endl;
+//    printf("a = %f, b = %f\n", a, b);
+    return 0;
+}
+```
+
+---
+
+# 算术运算符
+- 加(+)、减(-)、乘(*)
+- 除(/)：两个整数相除，值为整数，向 0 取整。  
+如 5/2 的值是 2，-5/2 的值是 -2，5.0/2 的值是 2.5。
+- 求余/模运算(%)：a%b 的值为 a 除以 b 的余数。操作对象只能是整数。  
+如 5%2 的值为 1。
+- 自增(++)，自减(--)
+	- x++ 表示在使用 x 之后，使 x 的值加 1，即 x=x+1；  
+	- ++x 表示使用 x 之前，先使 x 的值加 1，即 x=x+1。
+	- 思考 cout << x++; 和 cout << ++x;  的区别
+- 复合算术赋值。如 a+=b 相当于 a=a+b，a/=b 相当于 a=a/b。
+
+---
+
+# 关系运算符
+
+- 大于(>)、小于(<)、大于等于(>=)、小于等于(<=) 、等于(.red[==])、不等于(!=)
+- 关系运算符运算的结果是整型，值只有两种：0 或 1，0 代表关系不成立，1 代表关系成立
+
+```cpp
+int main() {
+    int n1 = 4, n2 = 5, n3;
+    n3 = n1 > n2;                       // n3 的值为 0
+    n3 = n1 < n2;                       // n3 的值变为 1
+    n3 = n1 == 4;                       // n3 的值变为 1
+    n3 = n1 != 4;                       // n3 的值变为 0
+    n3 = n1 == 1 + 3;                   // n3 的值变为 1
+}
+```
+
+---
+
+# 逻辑运算符
+
+- 逻辑运算符的结果有两种：0（假） 或 1（真）
+- 与(&&)：两个量都为真时结果才为真，否则为假。  
+如 (5 > 0) && (-4 < -2) 为真，(5 > 0) && (4 < 2) 为假。
+- 或(||)：两个量有一个量为真则结果为真，否则为假。  
+如 (5 > 0) || (4 < 2) 为真，(0 > 5) || (4 < 2) 为假。
+- 非(!)：只有右边有值。如果值为假则结果为真；否则为假。  
+如 !(5 > 0) 为假，!(5 < 0) 为真。
+- 非 0 的数字都可以理解为真。如 5 && 0 为假，5 || 0 为真。
+
+---
+
+# 练习题
+[洛谷](https://www.luogu.com.cn) - 训练 - 新手村 - 洛谷的第一个任务 - 前三道题
+
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

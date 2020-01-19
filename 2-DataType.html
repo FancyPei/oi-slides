@@ -1,0 +1,227 @@
+
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>数据类型</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 数据类型
+
+Fancy  
+2020/1/20
+
+---
+
+class: center, middle
+
+# 常量与变量
+
+---
+
+# 常量
+
+常量指在程序中使用的具体的数、字符。在运行过程中，其值不能被更改。
+- 整型常量：如 3, -5, 0x7f
+- 实型常量：如 3.0, -4.5, 1e9
+- 字符常量：用单引号括起来的字符，如 'k', '5', '\n'
+  - 注意，'a' 是字符常量，"a" 是字符串
+
+---
+
+# 符号常量
+
+常量可以直接调用（如 3, 'a'），也可以给常量取名字，即符号常量。  
+
+- 格式：`const 符号常量 = 常量字串;`
+- 例：`const double PI = 3.1415926;`
+- 优点：
+	- 可读性。很容易理解 PI 表示圆周率。
+	- 易改性。改一处就可以替换程序中所有使用该常量的位置。
+
+---
+
+# 变量
+
+变量代表一个储存单元，.red[变量的值]是可以改变的。  
+.red[变量的类型]（储存单元的大小）不能改变。
+
+如 `int i = 1, j;`  
+其中 i, j 为.red[变量名]，变量 i 的值为 1，变量 j 的值未知。
+
+----
+
+**变量名**：
+- 唯一性。不能重复定义。
+- 定义之后才能使用。
+- 由字母和下划线（"_"）开头，后面的字符可以是字母、数字、下划线。
+- 建议变量名短但有意义（如单词、拼音）。
+
+---
+
+class: center, middle
+
+# 数据类型
+
+整型、实型、字符型
+
+---
+
+# 整形
+
+|  数据类型 | 定义标识符 | 比特数| 数值范围| 数值范围|
+| :--------: | :--------: | :--------: | :--------: |  :--------: |
+| 短整型 | short [int] | 16| -32768~32767|-<math>2^{15}</math>~<math>2^{15}</math>-1|
+| 长整型 | [long] int | 32 | -2147483648 ~2147483647|-<math>2^{31}</math>~<math>2^{31}</math>-1|
+| 超长整型 | long long [int] | 64 | -<math>9\times 10^{18}</math> ~<math>9\times 10^{18}</math>|-<math>2^{63}</math>~<math>2^{63}</math>-1|
+| 无符号短整型 | unsigned short [int] | 16 | 0~65535|0~<math>2^{16}</math>-1|
+| 无符号长整型 | unsigned [long] [int] | 32 | 0~4294967295|0~<math>2^{32}</math>-1|
+| 无符号超长整型 | unsigned long long [int] | 64 | 0~<math>1.8\times 10^{19}<math>|0~<math>2^{64}</math>-1|
+---
+
+# 实型
+|  数据类型 | 定义标识符 | 比特数| 数值范围| 有效位数 |
+| :--------: | :--------: | :--------: | :--------: |  :--------: |
+| 浮点型| float | 32|  <math>-3.4\times 10^{-38}\sim 3.4\times 10^{38}</math> | 6~7 |
+| 双浮点型 | double |64|  <math>-1.7\times 10^{-308}\sim 1.7\times 10^{308}</math> | 15~16 |
+| 长双浮点型 | long double |128|  <math>-1.2\times 10^{-4932}\sim 1.2\times 10^{4932}</math> | 18~19 |
+---
+
+# 字符型
+
+<style>
+.small { font-size: 70% }
+</style>
+
+- [ASCII 码](https://blog.csdn.net/ld_lin/article/details/52344384)：空格 32，‘0’ 48，‘A’ 65，‘a’ 97
+
+- 转义字符
+
+| .small[转义字符] |.small[意义]|.small[ASCII码值(十进制)] |
+| :--------: | :--------: | :--------: |
+| .small[\a] | .small[响铃(BEL)] | .small[007] | 
+| .small[\b] | .small[退格(BS)] | .small[008] | 
+| .small[\f] | .small[换页(FF)] | .small[012] | 
+| .red[.small[\n]] | .small[换行(LF)] | .small[010] | 
+| .small[\r] | .small[回车(CR)] | .small[013] | 
+| .small[\t] | .small[水平制表(HT)] | .small[009] | 
+| .small[\v] | .small[垂直制表(VT)] | .small[011] | 
+| .small[\\\\\] | .small[反斜杠] | .small[092] | 
+| .small[\?] | .small[问号字符] | .small[063] | 
+| .small[\'] | .small[单引号字符] | .small[039] | 
+| .small[\"] | .small[双引号字符] | .small[034] | 
+| .red[.small[\0]] | .small[空字符(NULL)] | .small[000] | 
+| .small[\ddd] | .small[任意字符] | .small[三位八进制] | 
+| .small[\xhh] | .small[任意字符] | .small[二位十六进制] | 
+
+---
+
+# 字符型
+
+例：输入一个小写字母，输出对应的大写字母
+
+--
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+    char a, b;
+    cin >> a;
+    b = a - 'a' + 'A';
+//    b = a - 97 + 65;
+    cout << b << endl;
+}
+```
+
+---
+
+# 其它
+
+- 布尔型 bool  
+	- true 1
+	- false 0
+- 无类型 void
+---
+
+# 数据类型转换
+
+- 混合运算时：将存储长度短的变量转换成存储长度长的类型  
+char/short -> int -> unsigned int -> long long -> double <- float
+- 赋值时：
+	- 浮点数赋值给整数：截断小数（向 0 取整）。
+	- 长整数赋值给短整数：截断高位。
+	- 由短到长、由整数到浮点数的赋值基本不损失精度。
+- 强制类型转换：(类型名)(表达式)
+
+例：定义 `int b = 7; float a = 2.5, c = 4.7;`  
+求 `a + (int) (b / 3 * (int) (a + c) / 2.0) % 4`
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

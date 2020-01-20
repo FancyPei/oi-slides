@@ -1,0 +1,221 @@
+
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>数据类型</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 选择结构
+
+Fancy  
+2020/1/21
+
+---
+
+# if
+
+```cpp
+if (条件表达式) {
+    语句1;
+    语句2;
+    ......
+}
+```
+如果条件表达式的值为真，则语句 1, 2, ... 被执行，否则被忽略（不执行）。
+
+大括号中间的语句被称为语句块或复合语句。
+
+若只有一条语句，则可以省略大括号。
+
+---
+
+# if
+例：读入一个整数，如果是偶数则输出 yes。
+
+--
+
+```cpp
+int a;
+cin >> a;
+if (a % 2 == 0)
+    cout << "yes" << endl;
+```
+
+---
+
+# if-else
+
+```cpp
+if (条件表达式) {
+    语句1;
+    语句2;
+    ......
+} eles {
+    语句3;
+    语句4;
+    ......
+}
+```
+如果条件表达式的值为真，则语句 1, 2, ... 被执行，否则语句 3, 4, ... 被执行。
+
+---
+
+# if-else
+
+例：输入三个不同的数，输出最大的数。
+
+--
+
+```cpp
+int a, b, c, maxn;
+cin >> a >> b >> c;
+if (a > b && a > c) maxn = a;
+else if (b > a && b > c) maxn = b;
+else maxn = c;
+cout << maxn << endl;
+```
+
+```cpp
+int a, b, c, maxn;
+cin >> a >> b >> c;
+maxn = a;
+if (b > maxn) maxn = b;
+if (c > maxn) maxn = c;
+cout << maxn << endl;
+```
+
+---
+
+# 三目运算符
+
+格式：`a ? b : c`  
+如果 a 为真，则表达式的值为 b，否则为 c。
+
+----
+
+例：`x = 5 > 3 ? 10 : 12`  
+`x = a == 0 ? 1 : -1`
+
+----
+
+例：输入三个不同的数，输出最大的数。
+
+--
+
+```cpp
+int a, b, c, maxn;
+cin >> a >> b >> c;
+maxn = a > b ? (a > c ? a : c) : (b > c ? b : c);
+cout << maxn << endl;
+```
+
+---
+
+# switch
+```cpp
+switch(表达式){
+    case 常量表达式1:
+       语句序列1;
+       break;
+    case 常量表达式2:
+       语句序列2;
+       break;
+    ......
+    default:
+       语句序列n+1;
+}
+```
+
+注意：
+- 语句序列表示零或多个语句，不需要加大括号。
+- 表达式皆为整数。
+- 常量值不能重复。
+---
+
+# switch
+
+例：输入数字星期(1-7)，输出英文
+
+```cpp
+int n;
+scanf("%d", &n);
+switch(n) {
+    case 1: printf("Monday\n"); break;
+    case 2: printf("Tuesday\n"); break;
+    case 3: printf("Wednesday\n"); break;
+    case 4: printf("Thursday\n"); break;
+    case 5: printf("Friday\n"); break;
+    case 6: printf("Saturday\n"); break;
+    case 7: printf("Sunday\n"); break;
+    default: printf("Error\n");
+}
+```
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,228 @@
+
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>数据类型</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 数据输入输出
+
+Fancy  
+2020/1/21
+
+---
+
+# 流输入 cin
+
+从键盘输入数据。
+
+`cin >> 变量;`  
+`cin >> 变量1 >> 变量2 >> 变量3 ...... ;`
+
+----
+
+注意：
+- 键盘输入的数据必须与变量类型相符。
+- 读入多个数据，会忽略之间的空白字符（如空格、回车）。
+
+---
+
+# 流输出 cout
+
+输出数据到屏幕。
+
+`cout << 表达式;`  
+`cout << 表达式1 << 表达式2 << 表达式3 ...... ;`
+
+其中表达式可以时常量、变量的运算组合。程序根据表达式的类型和大小，自动采用不同的格式输出。
+
+----
+注意：
+- 字符串用双引号括起来，与变量名区分  
+```cpp
+cout << "hello";   // 输出字符串 Hello
+cout << hello;     // 输出变量 hello 的值
+```
+- 换行须使用 '\n' 或 endl  
+```cpp
+cout << "hello\n";
+cout << "hello" << endl;
+```
+---
+
+# 格式化输入 scanf
+
+格式：`scanf(格式控制符，地址列表)`
+
+- 格式控制符由%和格式符组合而成，格式符要和地址列表对应  
+- 地址列表，除了字符数组，其它前面加 &
+
+|  格式符  |  说明    |
+| :----: | :----: |
+|  d, i    | 十进制整数 |
+|    u  |   无符号十进制整数   |
+|  o / x   |  八 / 十六进制整数  |
+|   c   |  单个字符  |
+|   s   |  字符串（字符数组）  |
+|   f, e   |  实数  |
+|   l   |   double (%lf)  |
+|   ll   |   long long (%lld)  |
+|   整数（域宽）   |   指定输入所占列宽  |
+|  *  |  输入量不赋给变量 |
+
+---
+
+# 格式化输入 scanf
+
+- 输入 1 3，输出 a=1, b=3  
+```cpp
+int a;
+long long b;
+scanf("%d%lld", &a, &b);
+printf("a=%d, b=%lld\n", a, b);
+```
+- 输入 hello world，输出 hello  
+```cpp
+char s[40];
+scanf("%s", s);
+printf("%s\n", s);
+```
+- 输入 1,2,3，输出 1 3  
+```cpp
+int a, b;
+scanf("%d,%*d,%d", &a, &b);
+printf("%d %d\n", a, b);
+```
+
+---
+
+# 格式化输出 printf
+
+格式：`printf(格式控制符，输出列表)`
+
+和 scanf 的区别
+
+|  格式符  |  说明    |
+| :----: | :----: |
+| md | 输出m位，不足时在左边补空格，长于m时按实际长度 |
+| -md | 输出m位，不足时在右边补空格，长于m时按实际长度 |
+| 0md | 输出m位，不足时在左边补0，长于m时按实际长度 |
+|  f    | 以小数形式输出浮点数，隐含输出6位小数 |
+|  m.nf    | n位小数，总位数m（含小数点），不足时左边补空格（前面加-则右边补） |
+|  e, E    | 以指数形式输出浮点数，隐含输出6位小数 |
+|  ms   | 字符串，宽度m，左边补空格 |
+|  m.ns   | 输出宽度为m，其中字符最多n个，左补空格（前面加-则右边补） |
+
+---
+
+# 格式化输出 printf
+
+- 输入 1234567，输出 a= 1234, b=00567  
+```cpp
+int a, b;
+scanf("%4d%4d", &a, &b);
+printf("a=%5d, b=%05d\n", a, b);
+```
+- 输入 1.2 0.55，输出 a=1.20 , b=0.55000  
+```cpp
+double a, b;
+scanf("%lf%lf", &a, &b);
+printf("a=%-5.2lf, b=%.5lf\n", a, b);
+```
+---
+
+# 字符输入 getchar
+
+输入单个字符。  
+多于一个字符时只接收第一个。  
+数字也按字符处理。
+
+```cpp
+char c;
+c = getchar();
+```
+----
+注意：`cin >> c` 忽略空白字符，`getchar()`和`scanf("%c", &c)` 读任何字符
+---
+
+# 字符输出 putchar
+
+输出单个字符。接收字符或 ASCII 码。
+
+```cpp
+char c = 'A';
+putchar(c);    // 输出 A
+putchar('A');  // 输出 A
+putchar(65);   // 输出 A
+```
+
+---
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

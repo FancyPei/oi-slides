@@ -1,0 +1,345 @@
+
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>循环结构</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 循环结构
+
+Fancy  
+2020/1/22
+
+---
+
+# for 语句
+
+```cpp
+for (初始化表达式; 条件表达式; 增量表达式) {
+    语句1;
+    语句2;
+    ...
+}
+```
+
+例：计算 10!
+```cpp
+for (int i = 1; i <= 10; ++i) {
+    fac *= i;
+}
+```
+
+---
+
+# for 语句
+
+```cpp
+for (初始化表达式; 条件表达式; 增量表达式) {
+    语句1;
+    语句2;
+    ...
+}
+```
+
+执行过程：
+1. 执行“初始化表达式”，使控制变量获得一个初值。
+2. 判断控制变量是否满足“条件表达式”，若满足条件则执行一遍循环体（语句1, 2, ...），否则结束循环。
+3. 根据增量表达式，计算出控制变量所得到的新值。
+4. 转到第2步。
+
+---
+
+# for 语句
+
+- 将控制变量从 1 加到 100，增量为 1
+```
+for (i = 1; i <= 100; ++i)
+```
+- 将控制变量从 20 减到 2，增量为 -2
+```
+for (i = 20; i >= 2; i -= 2)
+```
+- 将控制变量的值以数列 55, 44, 22, 11 变化
+```
+for (i = 55; i > 0; i -= 11) {
+        if (i != 33) {
+            ......
+        }
+    }
+```
+- 将控制变量 i 和 j 共同进行循环，1 从 1 加到 50，j 从 5 加到 54，增量为 2
+```
+for (i = 1, j = 5; i <= 50 && j <= 54; ++i, ++j)
+```
+---
+
+# for 语句
+
+例：计算 1~100 中奇数的和、偶数的和。
+```cpp
+int main() {
+    int sum1 = 0, sum2 = 0;
+    for (int i = 1; i <= 100; ++i)
+        if (i % 2 == 1) sum1 += i;
+        else sum2 += i;
+    cout << sum1 << " " << sum2;
+    return 0;
+}
+```
+
+```cpp
+int main() {
+    int sum1 = 0, sum2 = 0;
+    for (int i = 1, j = 2; i <= 100; i += 2, j += 2) {
+        sum1 += i;
+        sum2 += j;
+    }
+    cout << sum1 << " " << sum2;
+    return 0;
+}
+```
+
+---
+
+# while 语句
+
+```cpp
+while (条件表达式) {
+    语句1;
+    语句2;
+    ...
+}
+```
+
+例：计算 10!
+
+```cpp
+int i = 0, fac = 1;
+while (i <= 10) {
+    ++i;
+    fac *= i;
+}
+```
+
+执行过程：
+1. 计算作为循环控制条件表达式的值 ，若为真，则执行循环体（语句1, 2, ...）；否则结束循环。
+2. 转到第2步。
+
+---
+
+# while 语句
+
+例：求 s=1+2+3+...+n，当加到第几项时，s 的值会超过 1000？
+```cpp
+int main() {
+    int n = 0, s = 0;
+    while (s <= 1000) {
+        ++n;
+        s += n;
+    }
+    cout << n;
+    return 0;
+}
+```
+
+```cpp
+int main() {
+    int n, s = 0;
+    for (n = 1; s <= 1000; ++n) {
+        s += n;
+    }
+    cout << n;
+    return 0;
+}
+```
+
+---
+
+# while 语句
+
+例：输入一些整数（值不超过 1000），求出它们的最小值和、最大值和平均值（保留 3 位小数）。  
+输入样例：2 8 3 5 1 7 3 6 ^Z  
+输出样例：1 8 4.375
+
+```cpp
+const int INF = 1e8;
+int main() {
+    int x, mini = INF, maxi = -INF, num = 0, sum = 0;
+    while (scanf("%d", &x) != EOF) {
+        mini = x < mini ? x : mini;
+        maxi = x > maxi ? x : maxi;
+        ++num;
+        sum += x;
+    }
+    printf("%d %d %.3lf\n", mini, maxi, (double)sum / num);
+    return 0;
+}
+```
+
+---
+
+# do-while 语句
+
+```cpp
+do {
+    语句1;
+    语句2;
+    ...
+} while (条件表达式);
+```
+
+例：计算 10!
+
+```cpp
+int i = 0, fac = 1;
+do {
+    ++i;
+    fac *= i;
+} while (i < 10);
+```
+
+执行过程：
+1. 执行循环体（语句1, 2, ...）。
+2. 计算作为循环控制条件表达式的值 ，若为真，则转到第1步；否则结束循环。
+
+---
+
+# 循环嵌套
+
+例：计算 1! + 2! + 3! + ... + 10!
+```cpp
+int sum = 0;
+for (int i = 1; i <= 10; ++i) {
+    int fac = 1;
+    for (int j = 1; j <= i; ++j)
+        fac *= j;
+    sum += fac;
+}
+cout << sum;
+```
+
+```cpp
+int sum = 0, fac = 1;
+for (int i = 1; i <= 10; ++i) {
+    fac *= i;
+    sum += fac;
+}
+cout << sum;
+```
+
+---
+
+# 循环嵌套
+
+例：计算 100~999 之间的水仙花数。若三位数 ABC = A<math>^3</math> + B<math>^3</math> + C<math>^3</math> 则称 ABC 为水仙花数。如 153 = <math>1^3 + 5^3 + 3^3</math>。
+```cpp
+for (int a = 1; a <= 9; ++a)
+  for (int b = 0; b <= 9; ++b)
+    for (int c = 0; c <= 9; ++c)
+      if (a * a * a + b * b * b + c * c * c == a * 100 + b * 10 + c)
+        cout << a * 100 + b * 10 + c << endl; 
+```
+
+```cpp
+for (int i = 100; i <= 999; ++i) {
+    int a = i / 100;
+    int b = (i % 100) / 10;
+    int c = i % 10;
+    if (a * a * a + b * b * b + c * c * c == i)
+        cout << i << endl;
+}
+```
+
+---
+
+# 循环嵌套
+
+例：输出 2~100 之间的所有素数。
+```cpp
+for (int i = 2; i <= 100; ++i) {
+    int x = 2;
+    while (x * x <= i && i % x != 0) ++x;
+    if (x * x > i) cout << i << endl;
+}
+```
+
+```cpp
+for (int i = 2; i <= 100; ++i) {
+    bool prime = 1;
+    for (int x = 2; x * x <= i; ++x)
+        if (i % x == 0) {
+            prime = 0;
+            break;
+        }
+    if (prime) cout << i << endl;
+}
+```
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

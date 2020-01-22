@@ -213,8 +213,65 @@ int main() {
 
 ---
 
+# 运算符优先级
+
+运算符优先级从低到高：  
+赋值运算符 逻辑运算符 关系运算符 算术运算符
+
+[C++ 运算符优先级](https://zh.cppreference.com/w/cpp/language/operator_precedence)
+
+|  优先级 |  运算符 | 描述 |
+| :--------: | :--------: | :--------: |
+|  2 | a++ a--| 后缀自增 自减 |
+| 3 | ++a --a ! (type) | 前缀自增 自减 非 强制转换 |
+| 5 | 	a*b   a/b   a%b| 乘法 除法 余数 |
+| 6 | a+b   a-b	| 加法 减法 |
+| 9 | < <= > >= | 小于 大于 |
+| 10| == != | 等于 不等于 |
+| 14| &&| 与 |
+| 15| ll| 或 |
+| 16| a?b:c = += -= *= /= %= | 三元条件 赋值 复合赋值 |
+
+---
+
+# 常用库函数
+
+加 `#include <cmath>` 头文件
+
+| 函数名 | 格式 | 功能说明 | 例子 |
+| :--------: | :--------: | :--------: | :--------: |
+| 绝对值 | abs(x) | 求数字x的绝对值 | abs(-5)=5 |
+| 向下取整 | floor(x) | 求不大于x的最大整数 | floor(3.14)=3|
+| 向上取整 | ceil(x) | 求不小于x的最小整数 | ceil(3.14)=4|
+| 指数函数 | pow(x,y) | <math>x^y</math> | pow(2, 3)=8 |
+| 平方根值 | sqrt(x) | <math>\sqrt{x}</math> | sqrt(25)=5 |
+| 自然数指数 | exp(x) | <math>e^x</math>| exp(1)=2.718282|
+| 自然数对数 | log(x) | <math>\ln x </math>| log(1)=0 |
+
+---
+
+# 常用库函数
+
+生成随机数
+
+```cpp
+#include <iostream> 
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+int main() {
+	srand(time(0));
+	cout << rand();
+    return 0;
+}
+```
+
+---
+
 # 练习题
 [洛谷](https://www.luogu.com.cn) - 训练 - 新手村 - 洛谷的第一个任务 - 前三道题
+
 
 
 </textarea>

@@ -252,17 +252,24 @@ int main() {
 
 # 常用库函数
 
+| 函数名 | 格式 | 功能说明 | 例子 |
+| :--------: | :--------: | :--------: | :--------: |
+| 最大值 | max(x, y) | 求数字x和y中的最大值 | max(2,5) = 5 |
+| 最小值 | min(x, y) | 求数字x和y中的最小值 | min(2,5) = 2 |
+
+----
+
 生成随机数
 
 ```cpp
 #include <iostream> 
 #include <cstdio>
-#include <cstdlib>
-#include <ctime>
+#include <cstdlib> // rand() 需要的头文件
+#include <ctime> // time() 需要的头文件
 using namespace std;
 int main() {
-	srand(time(0));
-	cout << rand();
+	srand(time(0)); // 用当前时间作为随机数种子
+	cout << rand(); // 生成随机数
     return 0;
 }
 ```

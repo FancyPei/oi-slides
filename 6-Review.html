@@ -1,0 +1,310 @@
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>复习</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 复习
+
+Fancy  
+2020/1/31
+
+---
+
+# 一个最简单的程序
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+    int a, b, c;
+    cin >> a >> b;
+    c = a + b;
+    cout << c << endl;
+    return 0;
+}
+```
+---
+
+# 运算符
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+    int a, b, c, d;
+    bool e, f;
+    cin >> a >> b;
+    
+    c = a + b; // 赋值运算，算术运算（加）
+    c *= 2; // 符合算数赋值
+    d = (++c) % a; // 算术运算（自增、取模）
+    e = a >= b; // 关系运算
+    f = (a >= b + e) && (a % 2 == 0); // 关系运算、算术运算、逻辑运算
+    
+    cout << c << " " << d << " " << e << " " << f << " " << endl;
+    return 0;
+}
+```
+
+---
+
+# 库函数
+```cpp
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+using namespace std;
+int main() {
+    srand(time(0));
+    int a, b, c, d, e;
+    double e, f;
+    cin >> f >> g;
+    
+    c = pow(a + b, 2); // 指数
+    d = rand(); // 随机数
+    e = max(a, b); // 最大值
+    f = (double)d / c;
+    g = ceil(e); // 向上取整
+    
+    cout << c << " " << d << " " << e << " " << f < " " << g << endl;
+    return 0;
+}
+```
+
+---
+
+# 数据类型
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+const int INF = 1e9; // 符号常量，可以理解为值不能改变的变量 
+const double PI = 3.1415926;
+int main() {
+	cout << INF << " " << PI << endl;
+	
+	int a = 3; // a 是变量，3 是常量 
+	cout << a * INF << " " << (long long)a * INF << endl; // 注意数据范围
+	
+	double b = -4.5;
+	cout << b / a << " " << (int)b / a << endl; // 注意整数除法
+	
+	char c = 'a'; // c 是变量，'a' 是常量 
+	cout << c - 32 << " " << (char)(c - 32) << endl; // 字符与整数对应（ASCII 码）
+	
+	bool d = (c == 97);
+	cout << d << endl;
+	return 0;
+}
+```
+
+---
+
+# 输入输出
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+	int a;
+	double b;
+	
+	cin >> a >> b;
+	scanf("%d %lf", a, b);
+	
+	double c = a + b;
+	
+	printf("%.3lf %lld\n", c, (long long)(a + b));
+	cout << c << " " << (long long)(a + b) << endl;
+	return 0;
+}
+```
+
+---
+
+# if-else
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+	int a;
+	cin >> a;
+	
+	if (a % 2 == 0) {
+		cout << "偶数" << endl;
+	} else {
+		cout << "奇数" << endl;
+	}
+	
+	printf("%s\n", (a % 2 == 0) ? "偶数" : "奇数");
+	return 0;
+}
+```
+
+---
+
+# 循环
+```cpp
+for (A; B; C) {
+    D;
+    ...
+}
+```
+等价于 
+```cpp
+A; 
+while (B) {
+    D;
+    ...
+    C;
+}
+```
+
+---
+
+# 循环
+
+s=1+2+3+...+n，当加到第几项时，s 的值会超过 1000？
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+	int n = 0, s = 0;
+    while (s <= 1000) {
+        ++n;
+        s += n;
+    }
+    cout << n << endl;
+    
+    for (n = 0, s = 0; s <= 1000; s += ++n);
+    cout << n << endl;
+	return 0;
+}
+```
+
+---
+
+# 最大值
+
+```cpp
+int a, b, c, maxn, x;
+cin >> a >> b >> c;
+
+// 方法 1
+maxn = max(max(a, b), c);
+cout << maxn << endl;
+
+// 方法 2
+maxn = a;
+if (b > maxn) maxn = b;
+if (c > maxn) maxn = c;
+cout << maxn << endl;
+
+// 方法 3
+maxn = -INF; // 输入数字范围的下界，如 -1e9 或 0
+for (int i = 1; i <= 3; ++i) {
+    cin >> x;
+    maxn = max(maxn, x);
+//  if (x > maxn) maxn = x;
+}
+cout << maxn << endl;
+```
+
+---
+
+# 最大值
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+const int INF = 1e9;
+int main() {
+	int n, maxn, x;
+	maxn = -INF; // 输入数字范围的下界，如 -1e9 或 0
+	cin >> n;
+	for (int i = 1; i <= n; ++i) { // 已知输入 n 个数字
+//  while (scanf("%d", &x) != EOF) { // 不知道输入个数
+    	cin >> x;
+    	maxn = max(maxn, x);
+//      if (x > maxn) maxn = x;
+}
+	cout << maxn << endl;
+	return 0;
+}
+```
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

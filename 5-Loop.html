@@ -173,7 +173,7 @@ int main() {
     for (n = 1; s <= 1000; ++n) {
         s += n;
     }
-    cout << n;
+    cout << n - 1;
     return 0;
 }
 ```
@@ -296,7 +296,7 @@ for (int i = 2; i <= 100; ++i) {
             prime = 0;
             break;
         }
-    if (prime) cout << i << endl;
+    if (prime == 1) cout << i << endl;
 }
 ```
 

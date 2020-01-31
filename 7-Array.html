@@ -1,0 +1,258 @@
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>数组</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 数组
+
+Fancy  
+2020/2/1
+
+---
+
+# 为什么需要数组
+
+为了处理大量数据 -> 引入循环  
+为了储存大量数据 -> 引入数组
+
+--
+
+----
+
+例：输入 50 个学生的成绩，输出低于平均分的学生序号和成绩
+
+```cpp
+for (int i = 1; i <= 50; ++i) {
+    cin >> x;
+    ...
+}
+```
+不可行，因为循环结束之后才知道平均分，此时前面的数据都已经丢掉了。
+
+```cpp
+cin >> a1 >> a2 >> ... >> a50;
+...
+```
+可行但不切实际，不符合计算机简化书写的初衷。
+
+---
+
+# 为什么需要数组
+
+例：输入 50 个学生的成绩，输出低于平均分的学生序号和成绩
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+	int total = 0, a[51];
+	for (int i = 1; i <= 50; ++i) {
+		cin >> a[i];
+		total += a[i];
+	} 
+	double average = total / 50.0;
+	for (int i = 1; i <= 50; ++i)
+		if (a[i] < average)
+			cout << i << " " << a[i] << endl;
+    return 0;
+}
+```
+
+---
+
+# 一维数组
+
+**定义**：`类型 名字[大小];`
+
+如 `int a[5];` 表示有 5 个元素的数组，名字是 a。元素依次表示为 a[0], a[1], a[2], a[3], a[4]。不包括 a[5]。
+
+----
+
+**初始化**
+
+```cpp
+int a[5]; // 大小为 5，元素为随机值
+int a[5] = {0, 2, 4, 1, 3}; // 大小为 5，元素分别为 0 2 4 1 3
+int a[] = {0, 2, 4, 1, 3}; // 大小为 5，元素分别为 0 2 4 1 3
+int a[5] = {1, 2}; // 大小为 5，元素分别为 1 2 0 0 0
+int a[5] = {0}; // 大小为 5，元素分别为 0 0 0 0 0
+```
+
+----
+
+**访问**：`数组名[下标]`
+
+下标可以是数字或表达式，但范围一定要在 `0` 到 `数组大小 - 1` 之间。否则称为数组越界，这种行为可以编译运行但是非常危险。
+
+不能直接访问数组名。
+
+---
+
+# 一维数组
+
+例：输入数字 n，然后输入 n 个数字数字，要求将数字逆序输出。保证输入个数不超过 100。
+
+```cpp
+int main() {
+	int n, a[101];
+	cin >> n;
+	for (int i = 1; i <= n; ++i)
+		cin >> a[i];
+	for (int i = n; i >= 1; --i)
+		cout << a[i] << " ";
+	return 0; 
+}
+```
+
+如果不知道 n
+```cpp
+int n = 0, a[102];
+while (scanf("%d", &a[n + 1]) != EOF) n++;
+for (int i = n; i >= 1; --i) cout << a[i] << " ";
+```
+
+---
+
+# 一维数组
+
+例：宾馆里有 100 个房间，编号 1-100。第一个服务员把所有门都打卡了，第二个服务员把所有编号是 2 的倍数的房间门作相反操作（开变关，关变开），...，第一百个服务员把编号为 100 的倍数的房间门作相反操作。此时有哪些门是开着的。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+	bool a[101] = {0};
+//  memset(a, 0, sizeof(a));
+	for (int i = 1; i <= 100; ++i)
+		for (int j = 1; j <= 100; ++j)
+			if (j % i == 0) a[j] = !a[j];
+	for (int i = 1; i <= 100; ++i)
+		if (a[i] == 1)
+			cout << i << " ";
+	return 0; 
+}
+```
+
+---
+
+# 二维数组
+
+定义：`类型 名字[大小1][大小2];`
+
+如 `a[3][4]` 表示有 3 行 4 列的表格，共有 12 个元素。
+
+|         |         |      |      |
+| :-----: | :-----: | :-----: | :-----: |
+| a[0][0] | a[0][1] | a[0][2] | a[0][3]|
+| a[1][0] | a[1][1] | a[1][2] | a[1][3]|
+| a[2][0] | a[2][1] | a[2][2] | a[2][3]|
+
+可以理解为数组的数组。当然还有三维、四维、n 维数组。
+
+----
+
+初始化：
+```cpp
+int a[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+```
+
+----
+
+访问：`数组名[下标 1][下标 2]`
+
+---
+
+# 二维数组
+
+例：输入一个 3*3 的矩阵（方阵），把矩阵的两条对角线上的元素加上 10 后输出 。
+
+```cpp
+int main() {
+	int a[4][4];
+	for (int i = 1; i <= 3; ++i)
+		for (int j = 1; j <= 3; ++j)
+			cin >> a[i][j];
+	for (int i = 1; i <= 3; ++i)
+		for (int j = 1; j <= 3; ++j)
+			if ((i == j) || (i + j == 4))
+				a[i][j] += 10;
+	for (int i = 1; i <= 3; ++i) {
+		for (int j = 1; j <= 3; ++j)
+			cout << a[i][j] << " ";
+		cout << endl;
+	}
+	return 0; 
+}
+```
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -85,16 +85,16 @@ using namespace std;
 int main() {
     srand(time(0));
     int a, b, c, d, e;
-    double e, f;
-    cin >> f >> g;
+    double f, g;
+    cin >> a >> b;
     
     c = pow(a + b, 2); // 指数
     d = rand(); // 随机数
     e = max(a, b); // 最大值
     f = (double)d / c;
-    g = ceil(e); // 向上取整
+    g = ceil(f); // 向上取整
     
-    cout << c << " " << d << " " << e << " " << f < " " << g << endl;
+    cout << c << " " << d << " " << e << " " << f << " " << g << endl;
     return 0;
 }
 ```
@@ -139,7 +139,7 @@ int main() {
 	double b;
 	
 	cin >> a >> b;
-	scanf("%d %lf", a, b);
+	scanf("%d %lf", &a, &b);
 	
 	double c = a + b;
 	

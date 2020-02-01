@@ -117,7 +117,7 @@ int a[5] = {0}; // 大小为 5，元素分别为 0 0 0 0 0
 
 # 一维数组
 
-例：输入数字 n，然后输入 n 个数字数字，要求将数字逆序输出。保证输入个数不超过 100。
+例：输入数字 n，然后输入 n 个数字，要求将数字逆序输出。保证输入个数不超过 100。
 
 ```cpp
 int main() {
@@ -150,7 +150,7 @@ for (int i = n; i >= 1; --i) cout << a[i] << " ";
 using namespace std;
 int main() {
 	bool a[101] = {0};
-//  memset(a, 0, sizeof(a));
+//  memset(a, 0, sizeof(a)); // 加 #include <cstring>
 	for (int i = 1; i <= 100; ++i)
 		for (int j = 1; j <= 100; ++j)
 			if (j % i == 0) a[j] = !a[j];

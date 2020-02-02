@@ -1,0 +1,199 @@
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>字符串</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 字符串
+
+Fancy  
+2020/2/3
+
+---
+
+# 字符类型
+
+char 变量名;  
+变量名 = '字符';
+
+[ASCII 码](https://blog.csdn.net/ld_lin/article/details/52344384)
+
+----
+
+例：输出a-z
+
+```cpp 
+int main(){
+	for (char i = 'a'; i <= 'z'; ++i)
+		cout << i << " ";
+}
+```
+
+例：以字符形式输入一个数字，输出数字*2
+```cpp
+int main(){
+	char c;
+	cin >> c;
+	cout << (c - '0') * 2;
+}
+```
+---
+
+# 字符数组
+
+定义：
+
+```cpp
+char s1[5]; // 数组 s1 是具有 5 个字符元素的一维字符数组
+char s2[3][5]; // 二维字符数组
+```
+
+初始化：
+```cpp
+char s1[5] = {'a', 'b', 'c', 'd', 'e'};
+char s2[5] = {'a', 'b', 'c', 'd', '\0'}; // 以'\0'结尾的若干个字符称为字符串
+char s3[5] = "abcd"; // 字符串的长度要比看起来多一个
+char s4[3][5] = {"abcd", "efg", ""};
+```
+
+赋值：
+```cpp
+char s1[5];
+s1[0] = 'a';
+s1[1] = 'b';
+```
+
+---
+
+# 字符串的输入输出
+
+```cpp
+char s[1000];
+scanf("%s", s); // 前面不加 &
+cin >> s;
+```
+
+```cpp
+printf("%s", s);
+cout << s;
+```
+
+关于字符串的读入：（以下c表示字符，s表示字符串）
+- 读入一个字符：`getchar(c);` `scanf("%c", &c);`
+- 读入一个字符（跳过空格和回车）：`cin>>c;`
+（注：如果读入字符前后已知有空格，那么可以 `scanf("%s", s);`，然后用 `s[0]`）
+- 读入一串字符（到空格和回车停止）：`cin>>s;` `scanf("%s", s);`
+- 读入一行字符（到回车停止）：`gets(s);` `cin.getline(s, 1001, '\n');` `fgets(s, 1001, stdin);`
+
+---
+
+# 字符串的输入输出
+
+例：输入第一行是文字（长度<=100），第二行有两个字母A和B，要求将原文中所有A替换为B。  
+输入  
+I have an apple.  
+I U  
+输出  
+U have an apple.
+
+```cpp
+int main(){
+	char s[105], A, B; 
+	cin.getline(s, 101, '\n');
+	cin >> A >> B;
+	for (int i = 0; s[i] != '\0'; ++i)
+		if (s[i] == A) cout << B;
+		else cout << s[i];
+	return 0;
+}
+```
+
+---
+
+# 字符串库函数
+
+`#include <cstring>`
+
+| 格式 | 功能 |
+| :------: | :--: |
+|strlen(s) | 计算s的长度，不包括'\0' |
+|strlwr(s)|将s中的大写字母转换成小写|
+|strupr(s)|将s中的小写字母转换成大写|
+|strcpy(s1, s2) | 将s2复制到s1|
+|strncpy(s1, s2, n)| 将s2的前n个字符复制到s1|
+|strcat(s1, s2) | 将s2复制到s1后面|
+|strncat(s1, s2, n)| 将s2的前n个字符复制到s1后面|
+|strcmp(s1, s2) | 比较s1和s2的大小（s1>s2返回正整数，s1=s2返回0，s1<s2返回负整数）|
+|strncmp(s1, s2, n)| 比较 s1 和 s2 前 n个字符的大小|
+|memset(s, c, n)| 将s的前n个变成字符c|
+|memset(a,0,sizeof(a))| 将数组a清空|
+
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -153,6 +153,106 @@ int main(){
 |memset(s, c, n)| 将s的前n个变成字符c|
 |memset(a,0,sizeof(a))| 将数组a清空|
 
+---
+
+# 例题
+
+输入一行字符，统计出其中数字字符的个数。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std; 
+int main() {
+	char s[1005];
+	int num = 0;
+	cin.getline(s, 1005, '\n');
+	int len = strlen(s);
+	for (int i = 0; i < len; ++i)
+		if (s[i] >= '0' && s[i] <= '9')
+			num++;
+	cout << num;
+	return 0;
+}
+```
+
+---
+
+# 例题
+
+输入一行字符，统计出每个大写字母的个数。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std; 
+int main() {
+	char s[1005];
+	int num[26] = {0};
+	cin.getline(s, 1005, '\n');
+	int len = strlen(s);
+	for (int i = 0; i < len; ++i)
+		if (s[i] >= 'A' && s[i] <= 'Z')
+			num[s[i] - 'A']++; 
+	for (int i = 0; i < 26; ++i)
+		cout << (char)(i + 'A') << ": " << num[i] << endl;
+	return 0;
+}
+```
+
+---
+
+# 例题
+
+输入两个字符串s1 s2，验证s2是否为s1的子串（一部分）。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std; 
+int main() {
+	char s1[1005], s2[1005];
+	cin >> s1 >> s2;
+	int len1 = strlen(s1), len2 = strlen(s2);
+	for (int i = 0; i + len2 <= len1; ++i) {
+		if (strncmp(s1 + i, s2, len2) == 0) {
+			cout << "Yes";
+			return 0;
+		}
+	}
+	cout << "No";
+	return 0;
+}
+```
+
+---
+
+# 例题
+
+输入一个字符串，判断它是不是回文串（正着和倒着读都一样，如 0, 0110, 1234321）。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+using namespace std; 
+int main() {
+	char s[1005];
+	cin >> s;
+	int len = strlen(s);
+	for (int i = 0, j = len - 1; i < j; ++i, --j) {
+		if (s[i] != s[j]) {
+			cout << "No";
+			return 0;
+		}
+	}
+	cout << "Yes";
+	return 0;
+}
+```
 
 </textarea>
 

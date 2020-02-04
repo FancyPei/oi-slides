@@ -1,0 +1,218 @@
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>函数</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 函数
+
+Fancy  
+2020/2/5
+
+---
+
+# int main 是什么
+
+```cpp
+int main() {
+	...
+	return 0;
+}
+```
+
+main() 函数  
+int 类型
+
+--
+
+----
+
+- c++ 标准函数 max(), abs(), rand(), ...
+	- 为编写程序提供便利
+- 自定义函数
+	- 分解问题，程序结构清晰，逻辑关系明确
+
+---
+
+# 函数（子程序）
+
+```cpp
+数据类型 函数名(参数列表) {
+	函数体 // 需要执行的语句
+	return x; // x 与上面的数据类型对应
+}
+```
+
+例：
+```cpp
+int main() { // 主函数，每个程序都有且仅有一个主函数
+	return 0;
+}
+int my_max(int x, int y) { // 最大值
+	return x > y ? x : y;
+}
+int fac(int n) { // 阶乘 (1*2*3*...*n)
+	int ans = 1;
+	for (int i = 1; i <= n; ++i) ans *= i;
+	return ans;
+}
+bool even(int n) { // 是否为偶数
+	return n % 2 == 0;
+}
+```
+
+---
+
+# 函数（子程序）
+
+```cpp
+数据类型 函数名(参数列表) {
+	函数体 // 需要执行的语句
+	return x; // x 与上面的数据类型对应
+}
+```
+
+注意：
+- 数据类型与函数返回值类型相同。若数据类型为 void 则无返回值（直接 `return;` ）。
+- 参数列表可以为任意自然数个，包括类型，之间用逗号隔开。
+	- 如 rand() 没有参数，abs() 有 1 个类型为 int 的参数，max() 有 2 个类型为 int 的参数（其实参数不一定是 int，暂不考虑）。
+- 不论函数体有多少条语句，大括号都不能省略。（与 if-else, for, while 不同。）
+
+---
+
+# 函数（子程序）
+
+例：计算 1! + 2! + 3! + ... + 10!
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int fac(int n) {
+	int ans = 1;
+	for (int i = 1; i <= n; ++i) ans *= i;
+	return ans;
+}
+int main() {
+	int sum = 0;
+	for (int i = 1; i <= 10; ++i) sum += fac(i);
+	cout << sum;
+	return 0;
+}
+```
+
+---
+
+# 函数（子程序）
+
+例：计算 1! + 2! + 3! + ... + 10!
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int fac(int);
+int main() {
+	int sum = 0;
+	for (int i = 1; i <= 10; ++i) sum += fac(i);
+	cout << sum;
+	return 0;
+}
+int fac(int n) {
+	int ans = 1;
+	for (int i = 1; i <= n; ++i) ans *= i;
+	return ans;
+}
+```
+
+---
+
+# 函数（子程序）
+
+- 函数的声明/定义：前两页的两种方法。
+- 函数的调用：在调用之前要先声明。
+	- 参数与声明中一一对应。
+	- 参数会进行复制，即在一个函数中操作不会改变另一个函数中对应变量的值。（若想要同时改变则在定义时参数前加 `&`，如 `int fac(int &n)`。）
+	- 有返回值的函数可以直接出现在表达式中进行运算。
+
+---
+
+# 全局变量和局部变量
+
+- 全局变量：在所有函数外部。作用域从定义的位置开始，到文件结束。
+	- 全局变量的默认初始值为 0。
+- 局部变量：在函数内部。作用域从定义的位置开始，到函数结束。
+	- 在代码块 (if-else, for, while 等) 中定义的变量也是局部变量，作用域到代码块结束。
+	- 不同的作用域之间可以使用相同的函数名。
+	- 局部变量和全局变量可以重名，此时使用局部变量。（不推荐）
+	- 局部变量的默认初始值随机，需要初始化。
+	- 局部变量受栈空间大小的限制，数组不能开太大。
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>递归</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 递归
+
+Fancy  
+2020/2/6
+
+---
+
+# 递归
+
+函数可以自己调用自己。
+
+```cpp
+int fac(int n) {
+	if (n == 0) return 1;
+	return fac(n - 1) * n;
+}
+```
+
+--
+
+递归：调用自身，通常是把大规模的问题变成小规模的问题。
+
+---
+
+# 递归
+
+计算 Hermite 多项式的值
+<math> \mathrm{h}_{\mathrm{n}}(\mathrm{x})=
+\begin{cases} 
+1 & {\mathrm{n}=0} \\
+2 \mathrm{x} & {\mathrm{n}=1} \\
+2 \mathrm{xh}_{\mathrm{n}-1}(\mathrm{x})-2(\mathrm{n}-1) \mathrm{h}_{\mathrm{n}-2}(\mathrm{x}) & {\mathrm{n}>1}
+\end{cases}
+</math>
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int Hermite(int n, int x) {
+	if (n == 0) return 1;
+	if (n == 1) return 2 * x;
+	if (n > 1) return 2 * x * Hermite(n - 1, x) - 2 * (n - 1) * Hermite(n - 2, x);
+}
+int main() {
+	int n, x;
+	cin >> n >> x;
+	cout << Hermite(n, x);
+	return 0;
+}
+```
+
+---
+
+# 最大公因（约）数
+
+gcd(m, n) = 最大的 x 使得 m 和 n 都是 x 的倍数
+
+- 素因数分解法
+- 更相减损术
+	- 算法：用较大数减较小数，计算差和较小数之间的最大公因数，直到两个数字相等为止。
+	- 例子：(27,12)->(15,12)->(3,12)->(9,3)->(6,3)->(3,3)->(0,3)
+	- 原理：gcd(m, n) == gcd(n, m - n) (当 m > n 时)
+- 辗转相除法
+	- 算法：计算n和m%n之间的最大公因数，直到m整除n为止。
+	- 例子：(27,12)->(12,3)->(3,0)
+	- 原理：gcd(m, n) == gcd(n, m % n)
+
+---
+
+# 最大公因（约）数
+
+- 更相减损术
+```cpp
+int gcd(int m, int n) {
+		if (m == n) return m;
+		if (m > n) return gcd(m - n, n);
+		return gcd(n - m, m);
+}
+```
+- 辗转相除法
+```cpp
+int gcd(int m, int n) {
+		return n == 0 ? m : gcd(n, m % n);
+}
+```
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

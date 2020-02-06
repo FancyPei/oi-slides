@@ -1,0 +1,315 @@
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>排序</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 排序
+
+Fancy  
+2020/2/7
+
+---
+
+# 选择排序
+
+从待排序的数据中选出最小（从最大）的元素，将其放在最前面，然后继续。
+
+[49 38 65 97 76 13 27 49]  
+13 [49 38 65 97 76 27 49]  
+13 27 [49 38 65 97 76 49]  
+13 27 38 [49 65 97 76 49]  
+13 27 38 49 [65 97 76 49]  
+13 27 38 49 49 [65 97 76]  
+13 27 38 49 49 65 [97 76]  
+13 27 38 49 49 65 76 [97]
+
+---
+
+# 选择排序
+
+
+找到 a[i] ~ a[n] 中的最小元素，与 a[i] 交换。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+	int n, a[1005];
+	cin >> n;
+	for (int i = 1; i <= n; ++i) cin >> a[i];
+	for (int i = 1; i <= n; ++i) {
+		int mini = i;
+		for (int j = i + 1; j <= n; ++j)
+			if (a[mini] > a[j]) mini = j;
+		swap(a[i], a[mini]);
+	}
+	for (int i = 1; i <= n; ++i) cout << a[i] << " ";
+	return 0;
+}
+```
+
+---
+
+# 冒泡排序
+
+重复遍历数列，如果发现两个相邻元素顺序错误就交换，直到没有可交换的为止。
+
+[49 38] 65 97 76 13 27 49  .float-right[38 [49 13] 27 49 65 76 97]  
+38 49 65 [97 76] 13 27 49  .float-right[38 13 [49 27] 49 65 76 97]  
+38 49 65 76 [97 13] 27 49  
+38 49 65 76 13 [97 27] 49  .float-right[[38 13] 27 49 49 65 76 97]  
+38 49 65 76 13 27 [97 49]  .float-right[13 [38 27] 49 49 65 76 97]  
+
+38 49 65 [76 13] 27 49 97  .float-right[13 27 38 49 49 65 76 97 &nbsp;&nbsp;]  
+38 49 65 13 [76 27] 49 97  
+38 49 65 13 27 [76 49] 97  
+
+38 49 [65 13] 27 49 76 97  
+38 49 13 [65 27] 49 76 97  
+38 49 13 27 [65 49] 76 97  
+
+
+---
+
+# 冒泡排序
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+	int n, a[1005];
+	cin >> n;
+	for (int i = 1; i <= n; ++i) cin >> a[i];
+	while (true) {
+		bool ok = true;
+		for (int j = 1; j < n; ++j) {
+			if (a[j] > a[j + 1]) {
+				swap(a[j], a[j + 1]);
+				ok = false;
+			}				
+		}
+		if (ok == true) break;
+	} 
+	for (int i = 1; i <= n; ++i) cout << a[i] << " ";
+	return 0;
+}
+```
+
+---
+
+# 插入排序
+
+每读入一个元素，在已经排好序的序列中找到正确的位置，然后把它插进去（类似于打牌）。注意后面的元素要往后移动一位。
+
+[49] 38 65 97 76 13 27 49  
+[38 49] 65 97 76 13 27 49  
+[38 49 65] 97 76 13 27 49  
+[38 49 65 97] 76 13 27 49  
+[38 49 65 76 97] 13 27 49  
+[13 38 49 65 76 97] 27 49  
+[13 27 38 49 65 76 97] 49  
+[13 27 38 49 49 65 76 97]  
+
+---
+
+# 插入排序
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+	int n, a[1005];
+	cin >> n;
+	for (int i = 1; i <= n; ++i) cin >> a[i];
+	for (int i = 2; i <= n; ++i) {
+		int x = a[i];
+		for (int j = i - 1; j >= 0; --j) {
+			if (j == 0 || x >= a[j]) {
+				a[j + 1] = x;
+				break;
+			} else {
+				a[j + 1] = a[j]; 
+			}
+		} 
+	}
+	for (int i = 1; i <= n; ++i) cout << a[i] << " ";
+	return 0;
+}
+```
+
+---
+
+# 桶排序
+
+如果待排序的值在一个较小的范围内，可以设计一些桶，桶号表示范围内的数字，桶内装对应数字的个数。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+int main() {
+	int n, x, num[1005] = {0};
+	cin >> n;
+	for (int i = 1; i <= n; ++i) {
+		cin >> x;
+		num[x]++;
+	}
+	for (int i = 1; i <= 1000; ++i)
+		for (int j = 1; j <= num[i]; ++j)
+			cout << i << " ";
+	return 0;
+}
+```
+
+---
+
+# C++ sort 函数
+
+sort 表示排序，默认从小到大排序。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+#include <algorithm> // sort 函数需要使用 algorithm 头文件
+using namespace std;
+int main() {
+	int n, a[1005];
+	cin >> n;
+	for (int i = 1; i <= n; ++i) cin >> a[i];
+	sort(a + 1, a + n + 1); // 从小到大排序
+	for (int i = 1; i <= n; ++i) cout << a[i] << " ";
+	return 0;
+}
+```
+
+---
+
+# C++ sort 函数
+
+如何从大到小排序？
+
+```cpp
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+bool cmp(int x, int y) {
+	return x > y;
+}
+int main() {
+	int n, a[1005];
+	cin >> n;
+	for (int i = 1; i <= n; ++i) cin >> a[i];
+	// 下面两种任选其一
+	sort(a + 1, a + n + 1, greater<int>()); // 从大到小排序
+	sort(a + 1, a + n + 1, cmp); // 从大到小排序（自定义排序函数）
+	for (int i = 1; i <= n; ++i) cout << a[i] << " ";
+	return 0;
+}
+```
+
+---
+
+# C++ unique 函数
+
+unique 表示去重，只能在有序序列上使用（必须先 sort）。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+using namespace std;
+int main() {
+	int n, a[1005];
+	cin >> n;
+	for (int i = 1; i <= n; ++i) cin >> a[i];
+	sort(a + 1, a + n + 1);
+	int m = unique(a + 1, a + n + 1) - a - 1;
+	// 去重后的结果在 a 的前 m 个数字
+	for (int i = 1; i <= m; ++i) cout << a[i] << " ";
+	return 0;
+}
+```
+
+---
+
+# C++ algorithm 库
+
+- sort(a + 1, a + n + 1) 排序
+- unique(a + 1, a + n + 1) 去重
+- reverse(a + 1, a + n + 1) 逆序
+- random_shuffle(a + 1, a + n + 1) 随机重排
+- nth_element(a + 1, a + number, a + n + 1) 将第 number 小的数字放在 a[number]
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>

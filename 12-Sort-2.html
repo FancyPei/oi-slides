@@ -1,0 +1,190 @@
+
+<html>
+  <Head>
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
+
+
+    <link rel="stylesheet" href="static/css/fonts/crmison.css"/>
+    <link rel="stylesheet" href="static/css/fonts/fira_code.css"/>
+    <link rel="stylesheet" href="static/css/fonts/ptsans.css"/>
+    <link rel="stylesheet" href="static/css/katex.min.css"/>
+    <link rel="stylesheet" href="static/css/wiki.css"/>
+    <link rel="stylesheet" href="static/css/codehilite.css"/>
+    
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/katex.min.js"></script>
+
+<link rel="stylesheet" href="static/css/wiki.css"/>
+<link rel="stylesheet" href="static/css/slides.css"/>
+
+
+    <title>课程简介</title>
+  </Head>
+  <body>
+
+
+<textarea id="source">
+public: True
+class: center, middle
+
+# 💻 排序算法
+
+2021/06/14
+
+???
+大家好，我是 xxx。我们今天来讲讲编程里面的算法。
+
+---
+
+# 电脑是什么？
+
+- 电脑 = 计算机 = 微型计算机（微机）
+- 计算机由硬件和软件组成
+	- 硬件：机箱（CPU、内存、主板）、鼠标、键盘
+	- 软件：操作系统、应用程序，看得见但是摸不着的
+- 手机也可以被称为计算机
+	
+
+???
+- 同学们平常微机课都学些什么呢？微机课有趣吗？对电脑有哪些了解？
+	- 我们上的微机课，它的意思是微型计算机。其实通常情况下不管是电脑、计算机还是微型计算机，它们指的都是同一个东西。也就是我们桌子底下的这个机箱，包括它里面的那些零件，以及鼠标、键盘，它们就组成了这个计算机的硬件部分。但是如果只有这些硬件的话，那这个电脑其实就是一堆废铜烂铁，我们怎么样才能跟计算机交流呢？那就需要软件。软件包括操作系统和应用程序，比如我们现在使用的 Windows 系统和 Chrome 浏览器。而这些软件全部是由程序员编写的，所以编程其实非常重要。
+	- 手机也可以被称为计算机。手机硬件就是它里面的电池、摄像头、主板、芯片，软件就是操作系统，常用的是安卓和iOS，以及应用程序，就是我么平常说的App。
+- 知道编程吗？想要学习编程吗？
+
+---
+
+# 为什么要学编程？
+
+- 信息世界（如电脑上的应用程序）大部分由程序构成
+- 电脑是优秀的工具（而不是玩具），它的计算能力比人脑要强得多
+- 锻炼逻辑思维能力
+???
+- 首先，我们说电脑上的操作系统、应用程序，全都是被程序员编写出来的。甚至连我今天的这一份幻灯片都是由程序组成的。
+- 电脑之所以被称作计算机，就是因为它的计算能力非常的强。为什么 Alpha Go 可以战胜最厉害的职业棋手，因为它比人脑算的快。即使是最普通的电脑也能在一秒之内计算上亿次九位数加法，而普通的人可能连一次都算不出来。
+- 学习了编程，就可以利用计算机完成复杂的计算工作。
+- 而且，电脑的优点是，你让它做什么就做什么，它会严格按照你写的程序执行，而不是像我们写着写着作业就走神了。但这也就会有一个问题是，你需要有很强的逻辑思维能力，把你要做的事情明确地告诉电脑，而且需要考虑到各种情况。
+- 算法就是一种明确的描述我们想要做的事情的方法。
+
+---
+
+# 算法
+
+- 算法是一个数学/计算机概念，表示解题方案的准确而完整的描述
+- 输入 -> 有限且清晰定义的运算步骤 -> 输出
+???
+- 算法，字面理解就是计算方法，表示我们解决一个问题的解题方案，它的准确而完整的描述。
+- 其实数学课上我们学过很多解题方法，它们都可以被称为算法。
+- 算法从输入开始，经过有限且清晰定义的运算步骤，计算得到输出结果。
+
+--
+<br></br>
+- 问题：判断数字 x 是不是质数
+- 输入：12
+- 输出：True/False
+???
+但是分解质因数是一个抽象的步骤，也就是说电脑是没有办法理解“分解质因数”这五个字的，我们还是得告诉它更具体的做法。
+--
+
+- 算法：从数字 2 开始到 x-1，判断其能不能被 x 整除
+???
+- 那我们今天要讲的算法是关于排序问题的算法
+
+---
+
+# 排序问题
+
+- 给出一个数字序列，希望将它们从小到大排序
+- 假设我们班有 5 位同学，他们昨天的数学作业的成绩分别是 5 3 5 2 8（总分 10 分）
+???
+- 在我们的生活中，到处都存在排序问题。站队的时候会按照身高排序，考试的名次需要按照分数排序，网上购物的时候会按照价格排序。
+- 假设我们班有 5 位同学，他们昨天的数学作业的成绩分别是 5 3 5 2 8（总分 10 分），我们希望将它们从小到大排序。
+- 也许你可能会疑惑，排序不是看一眼就可以得到答案了吗。但是如果有成千上万个数字，肉眼排序就变得无从下手。而如果我们先到一个形式化的解决方法，把它写成程序，交给电脑来计算，那么再多的数字都不是问题。这就是电脑的强大之处。
+- 所以想一想，怎么把你脑子里直观的想法用语言描述出来？
+---
+
+# 选择排序算法
+
+每次从待排序的数字中选出最小的数字，将其放在前面
+
+[5 3 5 2 8]  
+2 [5 3 5 8]  
+2 3 [5 5 8]  
+2 3 5 [5 8]  
+2 3 5 5 [8]  
+2 3 5 5 8
+
+---
+
+# 插入排序算法
+
+每输入一个元素，在已经排好序的序列中找到正确的位置，然后把它插进去
+
+[5 3 5 2 8]  
+5 [3 5 2 8]  
+3 5 [5 2 8]  
+3 5 5 [2 8]  
+2 3 5 5 [8]  
+2 3 5 5 8
+
+???
+大家都打过扑克牌吧。平常起牌的时候，我喜欢把起到了的牌按照顺序排好。也就是说，我现在手里已经有一些排好序的牌了，然后起到一张新牌，把它插在一个合适的位置。
+---
+
+# 桶排序算法
+
+如果数字的值在一个较小的范围内，可以设计一些桶，桶号表示范围内的数字，桶内记录数字的个数
+
+![image-20210614004811498](imgs/image-20210614004811498.png)
+
+???
+- 如果数字的值在一个较小的范围内，比如说对于成绩来说，有 0 到 10 共 11 种情况，所以我们可以设置标号为 0 到 10 的桶。
+- 有 5 个数字，分别为 5 3 5 2 8。那么可以把这 5 个数字分别放入相应的桶中。即，现在有 4 个桶中包含数字，且 5 号桶中有两个数字，其余桶为空。
+- 然后，从小到大分别查看所有的桶，如果桶中有数字，则它拿出来放入排好序的序列。即，我们分别将桶 2 3 5 8 中的数字拿出来，得到了序列 2 3 5 5 8。
+
+
+</textarea>
+
+<script src="static/js/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
+
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    
+      $("math").each(function() {
+        var tex = $(this).text();
+        var html = katex.renderToString(tex, {
+          displayMode: $(this).attr('class') == 'block-math',
+          throwOnError: false
+        });
+        $(this).replaceWith(html);
+      });
+    
+      function get_token() {
+        var match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
+        if (match) return match[2];
+        else return "";
+      }
+    
+      var token = get_token();
+      var hint = "(token)", box = $("#token-input");
+    
+      if (token == "") { box.val(hint); }
+      else { box.val(token); }
+    
+      function login() {
+        var token = box.val()
+        document.cookie = 'token=' + token + '; expires=Fri, 31 Dec 9999 23:59:59 GMT;';
+        if (token == '') {
+          box.val(hint);
+        }
+      }
+    </script>
+  </body>
+</html>
